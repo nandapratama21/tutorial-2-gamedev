@@ -1,33 +1,56 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdoksexcakmop"]
+[gd_scene load_steps=8 format=3 uid="uid://cdoksexcakmop"]
 
 [ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/StonePlatform.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="2"]
 [ext_resource type="Script" path="res://scenes/PlatformBlue.gd" id="3"]
 [ext_resource type="Script" path="res://scenes/ObjectiveArea.gd" id="4"]
+[ext_resource type="Script" path="res://scenes/BlueShip.gd" id="4_x8hby"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5ue0j"]
+specular_color = Color(0.517647, 0.552941, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(138.75, 79)
 
 [node name="MainLevel" type="Node"]
 
-[node name="PlatformBlue" type="Node2D" parent="."]
-position = Vector2(35, 565)
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.627451, 0.8, 0.776471, 1)
+show_behind_parent = true
+light_mask = 0
+visibility_layer = 4
+offset_right = 1152.0
+offset_bottom = 656.0
+texture = SubResource("CanvasTexture_5ue0j")
+
+[node name="PlatformBlue" type="Node2D" parent="TextureRect"]
+position = Vector2(966, 565)
 script = ExtResource("3")
 
-[node name="StonePlatform" parent="PlatformBlue" instance=ExtResource("1")]
+[node name="StonePlatform" parent="TextureRect/PlatformBlue" instance=ExtResource("1")]
 
-[node name="StonePlatform2" parent="PlatformBlue" instance=ExtResource("1")]
+[node name="StonePlatform2" parent="TextureRect/PlatformBlue" instance=ExtResource("1")]
 position = Vector2(70, 0)
 
+[node name="StonePlatform3" parent="TextureRect/PlatformBlue" instance=ExtResource("1")]
+position = Vector2(140, 0)
+
 [node name="BlueShip" parent="." instance=ExtResource("2")]
-position = Vector2(72.7009, 421.901)
+position = Vector2(983, 426)
 lock_rotation = true
+script = ExtResource("4_x8hby")
 
 [node name="ObjectiveArea" type="Area2D" parent="."]
+position = Vector2(931, 0)
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea"]
 position = Vector2(70.625, 40)
 shape = SubResource("1")
+
+[node name="BlueShip2" parent="." instance=ExtResource("2")]
+position = Vector2(1103, 425)
+lock_rotation = true
+script = ExtResource("4_x8hby")
 
 [connection signal="body_entered" from="ObjectiveArea" to="ObjectiveArea" method="_on_ObjectiveArea_body_entered"]

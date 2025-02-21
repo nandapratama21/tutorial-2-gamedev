@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://b64f3smx3dnml"]
+
+[ext_resource type="Script" path="res://scenes/PlatformBlue.gd" id="1_4r3rb"]
+[ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/StonePlatform.tscn" id="2_vrpgn"]
+[ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="3_edcyv"]
+[ext_resource type="Script" path="res://scenes/BlueShip.gd" id="4_ory3f"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ckv24"]
+specular_color = Color(0.517647, 0.552941, 1, 1)
+
+[node name="NextLevel" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.627451, 0.8, 0.776471, 1)
+show_behind_parent = true
+light_mask = 0
+visibility_layer = 4
+offset_right = 1152.0
+offset_bottom = 656.0
+texture = SubResource("CanvasTexture_ckv24")
+
+[node name="PlatformBlue" type="Node2D" parent="TextureRect"]
+position = Vector2(966, 565)
+script = ExtResource("1_4r3rb")
+
+[node name="StonePlatform" parent="TextureRect/PlatformBlue" instance=ExtResource("2_vrpgn")]
+
+[node name="StonePlatform2" parent="TextureRect/PlatformBlue" instance=ExtResource("2_vrpgn")]
+position = Vector2(70, 0)
+
+[node name="StonePlatform3" parent="TextureRect/PlatformBlue" instance=ExtResource("2_vrpgn")]
+position = Vector2(140, 0)
+
+[node name="StonePlatform4" parent="TextureRect/PlatformBlue" instance=ExtResource("2_vrpgn")]
+position = Vector2(-65, -1)
+
+[node name="StonePlatform5" parent="TextureRect/PlatformBlue" instance=ExtResource("2_vrpgn")]
+position = Vector2(-135, -1)
+
+[node name="BlueShip" parent="." instance=ExtResource("3_edcyv")]
+position = Vector2(983, 426)
+lock_rotation = true
+script = ExtResource("4_ory3f")
+
+[node name="BlueShip2" parent="." instance=ExtResource("3_edcyv")]
+position = Vector2(1103, 425)
+lock_rotation = true
+script = ExtResource("4_ory3f")
